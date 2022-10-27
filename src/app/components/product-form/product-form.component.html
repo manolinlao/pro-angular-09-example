@@ -1,0 +1,17 @@
+<form #myForm (ngSubmit)="submitForm(myForm)">
+  <div class="form-group">
+    <label>Nombre</label>
+    <input class="form-control" name="nombre" [(ngModel)]="newProduct.name"/>
+  </div>
+  <div class="form-group">
+    <label>Categoria</label>
+    <input class="form-control" name="categoria" [(ngModel)]="newProduct.category"/>
+  </div>
+  <div class="form-group">
+    <label>Precio</label>
+    <input class="form-control" name="precio" [(ngModel)]="newProduct.price"/>
+  </div>
+  <button class="btn btn-primary mt-1" type="submit">
+    Create
+  </button>
+</form>
