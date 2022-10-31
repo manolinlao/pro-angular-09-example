@@ -1,4 +1,5 @@
 import {Component, Input, OnInit, ViewChild, ViewChildren} from '@angular/core';
+import {Subject} from 'rxjs';
 import {Product} from 'src/app/model/product.model';
 import {Model} from '../../model/repository.model';
 
@@ -12,13 +13,25 @@ export class ProductTableComponent implements OnInit {
     @ViewChild('miTD') miTD: any;
     @ViewChild('miTD2') miTD2: any;
 
+    // para probar el async pipe
+    numeros: Subject<number> = new Subject<number>();
+
     showModel: boolean = true;
+    taxRate: number = 0;
+    categoryFilter: string = '';
 
     constructor() {}
 
     ngOnInit(): void {
         //esto dará un undefined
         console.log('product-table oninit', this.miTD);
+
+        let counter = 100;
+        /*
+        setInterval(() => {
+            this.numeros.next((counter += 10)), 10000;
+        });
+        */
     }
 
     ngAfterViewInit() {
