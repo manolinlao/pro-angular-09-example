@@ -1,5 +1,8 @@
+import {Injectable} from '@angular/core';
 import {SimpleDataSource} from './datasource.model';
 import {Product} from './product.model';
+
+@Injectable()
 export class Model {
     private products: Product[];
     private locator = (p: Product, id: number | any) => p.id == id;
