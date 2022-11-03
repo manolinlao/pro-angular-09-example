@@ -1,13 +1,11 @@
 import {SimpleDataSource} from './datasource.model';
 import {Product} from './product.model';
 export class Model {
-    private dataSource: SimpleDataSource;
     private products: Product[];
     private locator = (p: Product, id: number | any) => p.id == id;
 
-    constructor() {
+    constructor(private dataSource: SimpleDataSource) {
         console.log('repository.model', 'constructor');
-        this.dataSource = new SimpleDataSource();
         this.products = new Array<Product>();
         this.dataSource.getData().forEach((p) => this.products.push(p));
     }

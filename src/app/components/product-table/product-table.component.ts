@@ -9,7 +9,6 @@ import {Model} from '../../model/repository.model';
     styleUrls: ['./product-table.component.css'],
 })
 export class ProductTableComponent implements OnInit {
-    @Input('model') dataModel: Model | undefined;
     @ViewChild('miTD') miTD: any;
     @ViewChild('miTD2') miTD2: any;
 
@@ -20,7 +19,7 @@ export class ProductTableComponent implements OnInit {
     taxRate: number = 0;
     categoryFilter: string = '';
 
-    constructor() {}
+    constructor(private dataModel: Model) {}
 
     ngOnInit(): void {
         //esto dará un undefined
@@ -47,7 +46,9 @@ export class ProductTableComponent implements OnInit {
         return this.dataModel?.getProducts();
     }
 
-    deleteProduct(key: number) {
-        this.dataModel?.deleteProduct(key);
+    deleteProduct(key: number | undefined) {
+        if (key) {
+            this.dataModel?.deleteProduct(key);
+        }
     }
 }

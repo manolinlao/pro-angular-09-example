@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Product} from '../../model/product.model';
+import {Model} from '../../model/repository.model';
 
 @Component({
     selector: 'app-product-form',
@@ -9,14 +10,12 @@ import {Product} from '../../model/product.model';
 export class ProductFormComponent implements OnInit {
     newProduct: Product = new Product();
 
-    @Output('paNewProduct') newProductEvent = new EventEmitter<Product>();
-
-    constructor() {}
+    constructor(private model: Model) {}
 
     ngOnInit(): void {}
 
     submitForm(form: any) {
-        this.newProductEvent.emit(this.newProduct);
+        this.model.saveProduct(this.newProduct);
         this.newProduct = new Product();
         form.resetForm();
     }

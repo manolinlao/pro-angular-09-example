@@ -1,49 +1,22 @@
-
-<div>
-  <label>Tax Rate:</label>
-  <select class="form-select" [(ngModel)]="taxRate">
-    <option value="0">None</option>
-    <option value="10">10%</option>
-    <option value="20">20%</option>
-    <option value="50">50%</option>
-  </select>
-</div>
-
-<div class="my-2">
-  <label>category filter:</label>
-  <select class="form-select" [(ngModel)]="categoryFilter">
-    <option></option>
-    <option>watersports</option>
-    <option>soccer</option>
-    <option>chess</option>
-  </select>
-</div>
-
-
-
 <table class="table table-sm table-bordered table-striped">
-  <thead class="table-light">
-    <tr>
-      <th></th><th>Name</th><th>Category</th><th>Price</th><th></th>
-    </tr>
+  <thead>
+      <tr><th></th><th>Name</th><th>Category</th><th>Price</th><th></th></tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of getProducts() | myFilter:categoryFilter;let i=index; let odd=odd;let even=even"
-        [class.table-info]="odd" [class.table-warning]="even"
-        class="align-middle">
-        <td>{{i+1}}</td>
-        <td #miTD>{{item.name | mayusculas}}</td>
-        <td>{{item.category}}</td>
-        <td>{{item.price | addTax:(taxRate || 0)}}</td>
-        <td #miTD2 class="text-center">
-          <button class="btn btn-danger btn-sm" (click)="deleteProduct(item.id!)">
-            Delete
-          </button>
-        </td>
-    </tr>
-  </tbody>
+      <tr *ngFor="let item of getProducts(); let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.category}}</td>
+          <td>{{item.price | discount | currency:"USD":"symbol" }}</td>
+          <td class="text-center">
+              <button class="btn btn-danger btn-sm" 
+                      (click)="deleteProduct(item.id)">
+                  Delete
+              </button>
+          </td>
+      </tr>
+  </tbody>    
 </table>
 
-<div class="bg-info text-white p-2">
-  <div>Counter: {{numeros | async}}</div>
-</div>
+<app-discount-editor></app-discount-editor>
+<app-discount-display></app-discount-display>
